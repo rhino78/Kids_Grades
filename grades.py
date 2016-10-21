@@ -4,17 +4,11 @@ import selenium
 from selenium import webdriver
 from time import gmtime, strftime, localtime
 import creds
+import Bella_grades
+import Luisa_grades
+import Thomas_grades
 
-def trim_classes(class_name):
-    return {
-        'World Cultures':'World Cultures',
-        'Art MS 1':'Art',
-        'Beg. Band: Flute':'Band',
-        'Language Arts 6':'Language',
-        'Math 6 Accel':'Math',
-        'Science 6':'Science',
-        'Wellness Ed 6':'Wellness'
-        }[class_name]
+
 
 username = creds.USERNAME
 password = creds.PASSWORD
@@ -36,33 +30,15 @@ password.send_keys(creds.LOGINPW)
 search = br.find_element_by_tag_name('button')
 search.click()
 
-text = "Bella\n"
-change = br.find_elements_by_tag_name('button')
-for s in change:
-    if s.text == "Change Student":
-        s.click()
-
-time.sleep(1)
-radio = br.find_element_by_name("studentId")
-radio.click()
-change = br.find_elements_by_tag_name('button')
-for s in change:
-    if s.text == "Submit":
-        s.click()
-
-grades = br.find_elements_by_id('average')
-subjects = br.find_elements_by_id('courseName')
-b_grades = dict()
-
-for i, (g, s) in enumerate(zip(grades, subjects)):
-    b_grades[s.text] = g.text
-
-del b_grades['Advisory/Lunch']
-
-for key, value in sorted(b_grades.items()):
-        text += "{0} in {1}\n".format(value, trim_classes(key))
-
+luisa = Luisa_grades.grades(br)
+#server.sendmail(fromaddr, toaddr, luisa)
+bella = Bella_grades.grades(br)
+#server.sendmail(fromaddr, toaddr, bella)
+thomas = Thomas_grades.grades(br)
+#server.sendmail(fromaddr, toaddr, thomas)
 br.close()
 
-server.sendmail(fromaddr, toaddr, text)
-print(text)
+
+print(bella)
+print(luisa)
+print(thomas)
