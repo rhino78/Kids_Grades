@@ -1,5 +1,5 @@
 # Kids_Grades
-a useful script that texts me my kids grades everyday
+A useful script that texts me my kids grades everyday
 
 My kids go to a school district where they have an online tool that allows to you see the grades, and how they are doing. 
 
