@@ -7,6 +7,7 @@ import creds
 import Bella_grades
 import Luisa_grades
 import Thomas_grades
+import Bella_missing
 
 
 
@@ -31,14 +32,16 @@ search = br.find_element_by_tag_name('button')
 search.click()
 
 luisa = Luisa_grades.grades(br)
+print(luisa)
 #server.sendmail(fromaddr, toaddr, luisa)
 bella = Bella_grades.grades(br)
-#server.sendmail(fromaddr, toaddr, bella)
+print(bella)
+server.sendmail(fromaddr, toaddr, bella)
+missing = Bella_missing.missing(br)
+print(missing)
+server.sendmail(fromaddr, toaddr, missing)
 thomas = Thomas_grades.grades(br)
-#server.sendmail(fromaddr, toaddr, thomas)
+print(thomas)
+server.sendmail(fromaddr, toaddr, thomas)
 br.close()
 
-
-print(bella)
-print(luisa)
-print(thomas)

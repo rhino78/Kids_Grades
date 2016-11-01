@@ -20,13 +20,29 @@ def grades(br):
     text = "Luisa\n"
 
     grades = br.find_elements_by_id('average')
-    subjects = br.find_elements_by_id('courseName')
-    b_grades = dict()
+    subjects = br.find_elements_by_class_name('sg-5px-margin')
+    l_grades = dict()
 
-    for i, (g, s) in enumerate(zip(grades, subjects)):
-        b_grades[s.text] = g.text
+    ave_list = []
+    for g in grades:
+        ave_list.append(g.text)
 
-    for key, value in sorted(b_grades.items()):
+    #in the first week, the grades are empty
+    if not any(ave_list):
+        early_text = "no grades for Luisa yet"
+        return early_text
+    
+    subj_list = []       
+    for s in subjects:
+        subj_list.append(s.text.split("\n")[0])
+
+    del subj_list[0]
+    del subj_list[1]
+    
+    for i, (g, s) in enumerate(zip(subj_list, ave_list)):
+        l_grades[s] = g
+        
+    for key, value in sorted(l_grades.items()):
         text += "{0} in {1}\n".format(value, trim_classes(key))
 
     return text

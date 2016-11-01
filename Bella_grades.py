@@ -3,6 +3,7 @@ import selenium
 from selenium import webdriver
 
 
+
 def trim_classes(class_name):
     return {
         'Tx Hist & Geo':'Tx Hist',
