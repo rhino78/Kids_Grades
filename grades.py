@@ -33,7 +33,7 @@ search.click()
 
 luisa = Luisa_grades.grades(br)
 print(luisa)
-#server.sendmail(fromaddr, toaddr, luisa)
+server.sendmail(fromaddr, toaddr, luisa)
 bella = Bella_grades.grades(br)
 print(bella)
 server.sendmail(fromaddr, toaddr, bella)

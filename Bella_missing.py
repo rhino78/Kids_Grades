@@ -22,15 +22,20 @@ def missing(br):
 
     prev = ""
     text = "Bella missing \n"
+    is_missing = False
 
     for l in list_of_grades:
         for t in l.assignments:
                 if t == "M" or t == "0/100":
+                        is_missing = True
                         text = text + "{1} in {0} \n".format(l.name, prev)
                         
                 prev = t
 
-    return text
+    if is_missing:
+            return text
+    else:
+            return "Bella is not missing assignments"
 
 
 

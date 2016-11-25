@@ -8,7 +8,7 @@ def trim_classes(class_name):
         'Reading':'Reading',
         'Homeroom':'Homeroom',
         'Written Comp':'Writing',
-        'Social Studies':'Social Studies',
+        'Social Studies':'Soc Stu',
         'Math':'Math',
         'Science':'Science',
         'PE/Gray':'PE',
@@ -25,7 +25,11 @@ def grades(br):
 
     ave_list = []
     for g in grades:
-        ave_list.append(g.text)
+        test = g.text.strip()
+        if not test:
+            ave_list.append('none')
+        else:
+            ave_list.append(g.text)
 
     #in the first week, the grades are empty
     if not any(ave_list):
@@ -37,9 +41,9 @@ def grades(br):
         subj_list.append(s.text.split("\n")[0])
 
     del subj_list[0]
-    del subj_list[1]
+    del subj_list[0]
     
-    for i, (g, s) in enumerate(zip(subj_list, ave_list)):
+    for i, (g, s) in enumerate(zip(ave_list, subj_list)):
         l_grades[s] = g
         
     for key, value in sorted(l_grades.items()):
